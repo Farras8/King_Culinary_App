@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "693631622155",
+    "firebase_url": "https://kingculinarydb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "kingculinarydb",
+    "storage_bucket": "kingculinarydb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693631622155:android:644fb82b475ca216e0fb0e",
+        "android_client_info": {
+          "package_name": "com.example.kingculinary"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy-96jdL1CIi7gStnqG18Zy9icOZLyR5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

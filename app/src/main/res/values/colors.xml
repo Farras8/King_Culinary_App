@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="krem">#E4DAA9</color>
+    <color name="kremTua">#CCC296</color>
+    <color name="brown">#9C754B</color>
+    <color name="KuningCoklat">#E5A457</color>
+    <color name="Gray">#9A948F</color>
+    <color name="Green">#12bda6</color>
+    <color name="Greenn">#3CF30A</color>
+    <color name="Red">#F30505</color>
+</resources>

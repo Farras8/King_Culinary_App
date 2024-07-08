@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/krem"
+    tools:context=".SearchActivity">
+
+  <RelativeLayout
+      android:elevation="20dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginLeft="16dp"
+      android:id="@+id/searchView2"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:background="@drawable/rounded_corner"
+      android:padding="5dp"
+      app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.044"
+      tools:layout_editor_absoluteX="0dp">
+
+    <EditText
+        android:textColorHint="@color/Gray"
+        android:fontFamily="@font/regular_itim"
+        android:id="@+id/searchInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_corner"
+        android:hint="Search Recipe"
+        android:textAlignment="center"
+        android:textColor="@color/Gray"
+        android:textSize="18dp" />
+
+    <ImageButton
+        android:id="@+id/searchButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/rounded_corner"
+        android:clickable="true"
+        app:srcCompat="@drawable/baseline_search_24"
+        app:tint="@color/Green" />
+  </RelativeLayout>
+
+  <HorizontalScrollView
+      android:id="@+id/horizontalScrollView2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="16dp"
+      android:scrollbars="none"
+      app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/searchView2"
+      app:layout_constraintVertical_bias="0.034">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:orientation="horizontal">
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/btnAll"
+          android:layout_marginLeft="10dp"
+          app:cardElevation="10dp"
+          android:layout_width="110dp"
+          app:cardCornerRadius="10dp"
+          app:cardBackgroundColor="@color/kremTua"
+          android:layout_height="110dp">
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+          <ImageView
+              android:src="@drawable/breakfast_icon"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_gravity="center_vertical"/>
+          <TextView
+              android:fontFamily="@font/regular_itim"
+              android:layout_marginStart="37dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/Green"
+              android:text="All"
+              android:textSize="22dp"
+              android:textStyle="bold" />
+        </LinearLayout>
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/btnBreakfast"
+          android:layout_marginLeft="10dp"
+          app:cardElevation="10dp"
+          android:layout_width="110dp"
+          app:cardCornerRadius="10dp"
+          app:cardBackgroundColor="@color/kremTua"
+          android:layout_height="110dp">
+          <LinearLayout
+              android:padding="5dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+            <ImageView
+                android:src="@drawable/breakfast_icon"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:fontFamily="@font/regular_itim"
+                android:layout_marginStart="2dp"
+                android:id="@+id/getBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/Green"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+          </LinearLayout>
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/btnLunch"
+          app:cardElevation="10dp"
+          android:layout_width="110dp"
+          android:layout_marginLeft="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardBackgroundColor="@color/kremTua"
+          android:layout_height="110dp">
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+          <ImageView
+              android:src="@drawable/breakfast_icon"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_gravity="center_vertical"/>
+
+          <TextView
+              android:fontFamily="@font/regular_itim"
+              android:textAlignment="center"
+              android:layout_marginStart="22dp"
+              android:id="@+id/getLunch"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="20dp"
+              android:textColor="@color/Green"
+              android:textSize="22dp"
+              android:textStyle="bold" />
+        </LinearLayout>
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/btnBrunch"
+          app:cardElevation="10dp"
+          android:layout_width="110dp"
+          android:layout_marginLeft="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardBackgroundColor="@color/kremTua"
+          android:layout_height="110dp">
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+          <ImageView
+              android:src="@drawable/breakfast_icon"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_gravity="center_vertical"/>
+
+          <TextView
+              android:fontFamily="@font/regular_itim"
+              android:layout_marginStart="16dp"
+              android:layout_gravity="center_vertical"
+              android:id="@+id/getBrunch"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="20dp"
+              android:textColor="@color/Green"
+              android:textSize="22dp"
+              android:textStyle="bold" />
+        </LinearLayout>
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/btnDinner"
+          android:layout_width="110dp"
+          android:layout_marginLeft="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardBackgroundColor="@color/kremTua"
+          android:layout_height="110dp">
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+          <ImageView
+              android:src="@drawable/breakfast_icon"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_gravity="center_vertical"/>
+
+          <TextView
+              android:fontFamily="@font/regular_itim"
+              android:layout_marginStart="16dp"
+              android:layout_gravity="center_vertical"
+              android:id="@+id/getDinner"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="20dp"
+              android:textColor="@color/Green"
+              android:textSize="22dp"
+              android:textStyle="bold" />
+        </LinearLayout>
+      </androidx.cardview.widget.CardView>
+      <androidx.cardview.widget.CardView
+          android:id="@+id/btnAppetizer"
+          android:layout_width="110dp"
+          android:layout_marginLeft="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardBackgroundColor="@color/kremTua"
+          android:layout_height="110dp">
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+          <ImageView
+              android:src="@drawable/breakfast_icon"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_gravity="center_vertical"/>
+
+          <TextView
+              android:fontFamily="@font/regular_itim"
+              android:layout_marginStart="4dp"
+              android:layout_gravity="center_vertical"
+              android:id="@+id/getAppetizer"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="20dp"
+              android:textColor="@color/Green"
+              android:textSize="22dp"
+              android:textStyle="bold" />
+        </LinearLayout>
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/btnDessert"
+          android:layout_width="110dp"
+          android:layout_marginLeft="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardBackgroundColor="@color/kremTua"
+          android:layout_height="110dp">
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+          <ImageView
+              android:src="@drawable/breakfast_icon"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_gravity="center_vertical"/>
+
+          <TextView
+              android:fontFamily="@font/regular_itim"
+              android:layout_marginStart="13dp"
+              android:layout_gravity="center_vertical"
+              android:id="@+id/getDessert"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="20dp"
+              android:textColor="@color/Green"
+              android:textSize="22dp"
+              android:textStyle="bold" />
+        </LinearLayout>
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/btnMainCourse"
+          android:layout_width="110dp"
+          android:layout_marginLeft="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardBackgroundColor="@color/kremTua"
+          android:layout_height="110dp">
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+          <ImageView
+              android:src="@drawable/breakfast_icon"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_gravity="center_vertical"/>
+
+          <TextView
+              android:fontFamily="@font/regular_itim"
+              android:textAlignment="center"
+              android:layout_marginStart="13dp"
+              android:layout_marginEnd="13dp"
+              android:id="@+id/getMainCourse"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="20dp"
+              android:textColor="@color/Green"
+              android:textSize="22dp"
+              android:textStyle="bold" />
+        </LinearLayout>
+      </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+  </HorizontalScrollView>
+
+
+  <ListView
+      android:id="@+id/listViewSearch"
+      android:layout_width="match_parent"
+      android:layout_height="440dp"
+      android:layout_marginLeft="5dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginTop="4dp"
+      android:divider="@android:color/transparent"
+      android:dividerHeight="0dp"
+      app:layout_constraintBottom_toTopOf="@id/linearLayout3"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2"
+      app:layout_constraintVertical_bias="0.0"
+      tools:listitem="@layout/recycle_recipe" />
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/linearLayout3"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:background="@color/kremTua"
+      android:orientation="horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent">
+
+    <ImageView
+        android:id="@+id/navbarBtnHome"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/baseline_home_24"
+        android:tint="@color/Green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/navbarBtnSearch"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="28dp"
+        android:src="@drawable/baseline_search_24"
+        android:tint="@color/Green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/navbarBtnHome"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/navbarBtnPlusR"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/baseline_add_circle_outline_24"
+        android:tint="@color/Green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/navbarBtnProfile"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/navbarBtnProfile"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/baseline_person_24"
+        android:tint="@color/Green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
