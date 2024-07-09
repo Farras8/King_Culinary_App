@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.kingculinary.model.modelCategory;
+import com.example.kingculinary.model.modelRecipe;
+import com.example.kingculinary.model.modelUser;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -125,13 +128,13 @@ public class EditDetailRecipe extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                    modelRecipe recipe = dataSnapshot.getValue(modelRecipe.class);
                     if (recipe != null) {
                         recipeNameTextView.setText(recipe.getRecipeName());
                         recipeDateTextView.setText(recipe.getCreatedAt());
                         recipeIngredientsTextView.setText(recipe.getIngredients());
                         recipeInstructionsTextView.setText(recipe.getInstructions());
-                        getRecipeDescription.setText(recipe.getDescription());
+                        getRecipeDescription.setText(recipe.getDescriptions());
                         getRecipeCategory.setText(recipe.getCategory());
 
                         // Store the imageFile URL
@@ -139,9 +142,13 @@ public class EditDetailRecipe extends AppCompatActivity {
                         recipeId = dataSnapshot.getKey(); // Store the recipeId
 
                         // Load recipe image using Picasso
-                        Picasso.get()
-                                .load(imageFile)
-                                .into(recipeImageView);
+                        if (imageFile != null && !imageFile.isEmpty()) {
+                            Picasso.get()
+                                    .load(imageFile)
+                                    .into(recipeImageView);
+                        } else {
+                            recipeImageView.setImageResource(R.drawable.loading_icon); // Set default image if imageFile is empty
+                        }
 
                         // Retrieve the username from the users table using the email
                         String userEmail = recipe.getEmail();
@@ -149,15 +156,19 @@ public class EditDetailRecipe extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot userSnapshot) {
                                 for (DataSnapshot userDataSnapshot : userSnapshot.getChildren()) {
-                                    User user = userDataSnapshot.getValue(User.class);
+                                    modelUser user = userDataSnapshot.getValue(modelUser.class);
                                     if (user != null) {
                                         recipeUsernameTextView.setText(user.getUsername());
 
                                         // Load user profile picture using Picasso or set default image
-                                        Picasso.get()
-                                                .load(user.getProfilePicture())
-                                                .error(R.drawable.baseline_account_circle_24) // Set default image if profile picture is not found
-                                                .into(userImageView);
+                                        if (user.getProfilePicture() != null && !user.getProfilePicture().isEmpty()) {
+                                            Picasso.get()
+                                                    .load(user.getProfilePicture())
+                                                    .error(R.drawable.baseline_account_circle_24) // Set default image if profile picture is not found
+                                                    .into(userImageView);
+                                        } else {
+                                            userImageView.setImageResource(R.drawable.baseline_account_circle_24);
+                                        }
                                     }
                                 }
                             }
@@ -176,6 +187,7 @@ public class EditDetailRecipe extends AppCompatActivity {
                 // Handle error if needed
             }
         });
+
 
     }
 
@@ -232,7 +244,7 @@ public class EditDetailRecipe extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> categoriesList = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    modalCategory category = snapshot.getValue(modalCategory.class);
+                    modelCategory category = snapshot.getValue(modelCategory.class);
                     if (category != null) {
                         categoriesList.add(category.getCatName());
                     }
@@ -408,14 +420,14 @@ public class EditDetailRecipe extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Recipe updatedRecipe = snapshot.getValue(Recipe.class);
+                    modelRecipe updatedRecipe = snapshot.getValue(modelRecipe.class);
                     if (updatedRecipe != null) {
                         // Update TextViews with new data
                         recipeNameTextView.setText(updatedRecipe.getRecipeName());
                         recipeDateTextView.setText(updatedRecipe.getCreatedAt());
                         recipeIngredientsTextView.setText(updatedRecipe.getIngredients());
                         recipeInstructionsTextView.setText(updatedRecipe.getInstructions());
-                        getRecipeDescription.setText(updatedRecipe.getDescription());
+                        getRecipeDescription.setText(updatedRecipe.getDescriptions());
                         getRecipeCategory.setText(updatedRecipe.getCategory());
 
                         // Load updated recipe image using Picasso
@@ -429,7 +441,7 @@ public class EditDetailRecipe extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot userSnapshot) {
                                 for (DataSnapshot userDataSnapshot : userSnapshot.getChildren()) {
-                                    User user = userDataSnapshot.getValue(User.class);
+                                    modelUser user = userDataSnapshot.getValue(modelUser.class);
                                     if (user != null) {
                                         recipeUsernameTextView.setText(user.getUsername());
 

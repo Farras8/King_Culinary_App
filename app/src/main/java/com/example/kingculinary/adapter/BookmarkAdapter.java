@@ -1,4 +1,4 @@
-package com.example.kingculinary;
+package com.example.kingculinary.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kingculinary.R;
+import com.example.kingculinary.model.modelRecipe;
 import com.squareup.picasso.Picasso;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -18,9 +20,9 @@ import java.util.ArrayList;
 
 public class BookmarkAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<Recipe> mRecipes;
+    private ArrayList<modelRecipe> mRecipes;
 
-    public BookmarkAdapter(Context context, ArrayList<Recipe> recipes) {
+    public BookmarkAdapter(Context context, ArrayList<modelRecipe> recipes) {
         mContext = context;
         mRecipes = recipes;
     }
@@ -51,7 +53,7 @@ public class BookmarkAdapter extends BaseAdapter {
         TextView category = convertView.findViewById(R.id.categoryName);
         ImageView bookmarkIcon = convertView.findViewById(R.id.Bookmark); // Ensure there is an ImageView for the bookmark
 
-        final Recipe currentRecipe = mRecipes.get(position);
+        final modelRecipe currentRecipe = mRecipes.get(position);
 
         Picasso.get()
                 .load(currentRecipe.getImageFile())
@@ -78,7 +80,7 @@ public class BookmarkAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void removeBookmark(Recipe recipe) {
+    private void removeBookmark(modelRecipe recipe) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
             String userId = mAuth.getCurrentUser().getUid();

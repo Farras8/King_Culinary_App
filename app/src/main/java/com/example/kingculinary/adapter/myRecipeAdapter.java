@@ -1,4 +1,4 @@
-package com.example.kingculinary;
+package com.example.kingculinary.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,16 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.example.kingculinary.R;
+import com.example.kingculinary.model.modelRecipe;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class myRecipeAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<Recipe> mRecipes;
+    private ArrayList<modelRecipe> mRecipes;
 
-    public myRecipeAdapter (Context context, ArrayList<Recipe> recipes) {
+    public myRecipeAdapter (Context context, ArrayList<modelRecipe> recipes) {
         mContext = context;
         mRecipes = recipes;
     }

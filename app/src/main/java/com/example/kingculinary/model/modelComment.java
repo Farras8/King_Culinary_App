@@ -1,6 +1,6 @@
-package com.example.kingculinary;
+package com.example.kingculinary.model;
 
-public class modalComment {
+public class modelComment {
 
     private String commentId;
     private String recipeId;
@@ -49,11 +49,11 @@ public class modalComment {
     private String commentText;
     private String timestamp;
 
-    public modalComment() {
+    public modelComment() {
         // Default constructor diperlukan untuk Firebase Realtime Database
     }
 
-    public modalComment(String commentId, String recipeId, String userId, String commentText, String timestamp) {
+    public modelComment(String commentId, String recipeId, String userId, String commentText, String timestamp) {
         this.commentId = commentId;
         this.recipeId = recipeId;
         this.userId = userId;

@@ -1,8 +1,8 @@
-package com.example.kingculinary;
+package com.example.kingculinary.model;
 
 import java.util.Date;
 
-public class User {
+public class modelUser {
 
     String username;
     String email;
@@ -68,7 +68,7 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public User(String username, String email, String password) {
+    public modelUser(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -79,7 +79,7 @@ public class User {
 
     String bio;
 
-public User(){
+public modelUser(){
 
 }
 

@@ -1,4 +1,4 @@
-package com.example.kingculinary;
+package com.example.kingculinary.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.example.kingculinary.R;
+import com.example.kingculinary.model.modelRecipe;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,12 +25,12 @@ import java.util.ArrayList;
 public class SearchAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<Recipe> mRecipes;
+    private ArrayList<modelRecipe> mRecipes;
     private String activeUserEmail;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    public SearchAdapter(Context context, ArrayList<Recipe> recipes, String activeUserEmail) {
+    public SearchAdapter(Context context, ArrayList<modelRecipe> recipes, String activeUserEmail) {
         mContext = context;
         mRecipes = recipes;
         this.activeUserEmail = activeUserEmail;

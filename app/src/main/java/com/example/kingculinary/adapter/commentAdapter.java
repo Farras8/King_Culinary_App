@@ -1,4 +1,4 @@
-package com.example.kingculinary;
+package com.example.kingculinary.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.example.kingculinary.R;
+import com.example.kingculinary.commentActivity;
+import com.example.kingculinary.model.modelComment;
+import com.example.kingculinary.model.modelUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,13 +29,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class commentAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<modalComment> mCommentList;
+    private ArrayList<modelComment> mCommentList;
     private DatabaseReference mUserReference;
     private DatabaseReference mCommentReference;
     private String activeUserEmail;
     private FirebaseAuth mAuth;
 
-    public commentAdapter(Context context, ArrayList<modalComment> commentList, String activeUserEmail) {
+    public commentAdapter(Context context, ArrayList<modelComment> commentList, String activeUserEmail) {
         mContext = context;
         mCommentList = commentList;
         mUserReference = FirebaseDatabase.getInstance().getReference("user");
@@ -67,7 +71,7 @@ public class commentAdapter extends BaseAdapter {
         TextView getRecipeDate = convertView.findViewById(R.id.getRecipeDate);
         ImageView btnDel = convertView.findViewById(R.id.BtnDel);
 
-        modalComment comment = mCommentList.get(position);
+        modelComment comment = mCommentList.get(position);
 
         // Set data komentar ke views
         getRecipeComment.setText(comment.getCommentText());
@@ -78,7 +82,7 @@ public class commentAdapter extends BaseAdapter {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    User user = snapshot.getValue(User.class);
+                    modelUser user = snapshot.getValue(modelUser.class);
                     if (user != null) {
                         getRecipeUsername.setText(user.getUsername());
 

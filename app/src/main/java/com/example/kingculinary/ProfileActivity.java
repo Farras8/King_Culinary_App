@@ -14,7 +14,6 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.kingculinary.adapter.myRecipeAdapter;
+import com.example.kingculinary.model.modelRecipe;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -86,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Recipe selectedRecipe = (Recipe) parent.getItemAtPosition(position);
+                modelRecipe selectedRecipe = (modelRecipe) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(ProfileActivity.this, EditDetailRecipe.class);
                 intent.putExtra("recipeName", selectedRecipe.getRecipeName());
@@ -402,10 +403,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         recipesRef.orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Recipe> userRecipes = new ArrayList<>();
+                ArrayList<modelRecipe> userRecipes = new ArrayList<>();
 
                 for (DataSnapshot recipeSnapshot : snapshot.getChildren()) {
-                    Recipe recipe = recipeSnapshot.getValue(Recipe.class);
+                    modelRecipe recipe = recipeSnapshot.getValue(modelRecipe.class);
                     userRecipes.add(recipe);
                 }
 

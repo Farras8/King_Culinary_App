@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.kingculinary.model.modelCategory;
+import com.example.kingculinary.model.modelRecipe;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -112,7 +114,7 @@ public class editRecipeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 categoriesList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    modalCategory category = snapshot.getValue(modalCategory.class);
+                    modelCategory category = snapshot.getValue(modelCategory.class);
                     if (category != null) {
                         categoriesList.add(category.getCatName());
                     }
@@ -190,7 +192,7 @@ public class editRecipeActivity extends AppCompatActivity {
     }
 
     private void updateRecipeInDatabase(String recipeId, String recipeName, String ingredients, String instructions, String descriptions, String category, String imageUrl) {
-        Recipe updatedRecipe = new Recipe(recipeId, imageUrl, recipeName, category, descriptions, ingredients, instructions);
+        modelRecipe updatedRecipe = new modelRecipe(recipeId, imageUrl, recipeName, category, descriptions, ingredients, instructions);
         databaseReference.child(recipeId).setValue(updatedRecipe).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(editRecipeActivity.this, "Recipe updated successfully", Toast.LENGTH_SHORT).show();

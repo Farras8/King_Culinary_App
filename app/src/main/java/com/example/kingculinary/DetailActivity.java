@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.kingculinary.model.modelRecipe;
+import com.example.kingculinary.model.modelUser;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -110,14 +112,14 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                    modelRecipe recipe = dataSnapshot.getValue(modelRecipe.class);
                     if (recipe != null) {
                         recipeId = dataSnapshot.getKey(); // Get the recipeId
                         recipeNameTextView.setText(recipe.getRecipeName());
                         recipeDateTextView.setText(recipe.getCreatedAt());
                         recipeIngredientsTextView.setText(recipe.getIngredients());
                         recipeInstructionsTextView.setText(recipe.getInstructions());
-                        getRecipeDescription.setText(recipe.getDescription());
+                        getRecipeDescription.setText(recipe.getDescriptions());
                         getRecipeCategory.setText(recipe.getCategory());
 
                         Picasso.get().load(imageFile).into(recipeImageView);
@@ -132,7 +134,7 @@ public class DetailActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot userSnapshot) {
                                 for (DataSnapshot userDataSnapshot : userSnapshot.getChildren()) {
-                                    User user = userDataSnapshot.getValue(User.class);
+                                    modelUser user = userDataSnapshot.getValue(modelUser.class);
                                     if (user != null) {
                                         recipeUsernameTextView.setText(user.getUsername());
                                         Glide.with(DetailActivity.this)

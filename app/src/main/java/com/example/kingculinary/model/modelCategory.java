@@ -1,8 +1,8 @@
-package com.example.kingculinary;
+package com.example.kingculinary.model;
 
-public class modalCategory {
+public class modelCategory {
     private String catName;
-    public modalCategory() {
+    public modelCategory() {
     }
     public String getCatName() {
         return catName;
@@ -12,7 +12,7 @@ public class modalCategory {
         this.catName = catName;
     }
 
-    public modalCategory(String catName) {
+    public modelCategory(String catName) {
         this.catName = catName;
     }
 }

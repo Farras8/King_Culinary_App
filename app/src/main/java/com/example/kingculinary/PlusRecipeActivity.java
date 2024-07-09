@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.kingculinary.model.modelCategory;
+import com.example.kingculinary.model.modelRecipe;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -134,6 +136,7 @@ public class PlusRecipeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Clear all inputs and reset the activity
                 add_title.setText("");
+                add_description.setText("");
                 addIngredient.setText("");
                 addInstruction.setText("");
                 up_photo.setImageResource(R.drawable.up_photo);
@@ -148,7 +151,7 @@ public class PlusRecipeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 categoriesList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    modalCategory category = snapshot.getValue(modalCategory.class);
+                    modelCategory category = snapshot.getValue(modelCategory.class);
                     if (category != null) {
                         categoriesList.add(category.getCatName());
                     }
@@ -216,7 +219,7 @@ public class PlusRecipeActivity extends AppCompatActivity {
                                     try {
                                         String imageUrl = uri.toString();
                                         String recipeId = databaseReference.push().getKey();
-                                        Recipe recipe = new Recipe(imageUrl, title, category, description, ingredients, instructions, userEmail);
+                                        modelRecipe recipe = new modelRecipe(imageUrl, title, category, description, ingredients, instructions, userEmail);
                                         if (recipeId != null) {
                                             databaseReference.child(recipeId).setValue(recipe).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override

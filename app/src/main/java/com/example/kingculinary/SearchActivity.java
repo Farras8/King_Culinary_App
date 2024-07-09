@@ -16,6 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.kingculinary.adapter.SearchAdapter;
+import com.example.kingculinary.model.modelCategory;
+import com.example.kingculinary.model.modelRecipe;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +36,7 @@ public class SearchActivity extends AppCompatActivity {
     TextView getBreakfast, getLunch, getBrunch, getDinner, getAppetizer, getDessert, getMainCourse;
     CardView btnBreakfast, btnLunch, btnBrunch, btnDinner, btnAppetizer, btnDessert, btnMainCourse, btnAll;
     ListView listViewSearch;
-    ArrayList<Recipe> mRecipe;
+    ArrayList<modelRecipe> mRecipe;
     SearchAdapter searchAdapter;
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recipes");
     final private DatabaseReference categoryRef = FirebaseDatabase.getInstance().getReference("category");
@@ -163,7 +166,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    modalCategory category = dataSnapshot.getValue(modalCategory.class);
+                    modelCategory category = dataSnapshot.getValue(modelCategory.class);
                     if (category != null) {
                         // Misalnya, sesuaikan TextView berdasarkan catName dari database
                         switch (category.getCatName()) {
@@ -204,7 +207,7 @@ public class SearchActivity extends AppCompatActivity {
         listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Recipe selectedRecipe = (Recipe) parent.getItemAtPosition(position);
+                modelRecipe selectedRecipe = (modelRecipe) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
                 intent.putExtra("recipeName", selectedRecipe.getRecipeName());
@@ -223,7 +226,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mRecipe.clear(); // Clear existing data before adding new data
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                    modelRecipe recipe = dataSnapshot.getValue(modelRecipe.class);
                     if (recipe != null) {
                         mRecipe.add(recipe);
                     }
@@ -273,8 +276,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void filterRecipesByCategory(String category) {
-        ArrayList<Recipe> filteredRecipes = new ArrayList<>();
-        for (Recipe recipe : mRecipe) {
+        ArrayList<modelRecipe> filteredRecipes = new ArrayList<>();
+        for (modelRecipe recipe : mRecipe) {
             if (recipe.getCategory() != null && recipe.getCategory().equals(category)) {
                 filteredRecipes.add(recipe);
             }
@@ -285,8 +288,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void filterRecipesByName(String searchText) {
-        ArrayList<Recipe> filteredRecipes = new ArrayList<>();
-        for (Recipe recipe : mRecipe) {
+        ArrayList<modelRecipe> filteredRecipes = new ArrayList<>();
+        for (modelRecipe recipe : mRecipe) {
             // Filter berdasarkan nama resep (case insensitive)
             if (recipe.getRecipeName().toLowerCase(Locale.getDefault()).contains(searchText)) {
                 filteredRecipes.add(recipe);

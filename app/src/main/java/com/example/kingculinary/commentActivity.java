@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.kingculinary.adapter.commentAdapter;
+import com.example.kingculinary.model.modelComment;
+import com.example.kingculinary.model.modelUser;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -39,7 +42,7 @@ public class commentActivity extends AppCompatActivity {
     String recipeId;
     DatabaseReference commentReference, userReference, bookmarkReference;
     FirebaseAuth firebaseAuth;
-    ArrayList<modalComment> commentList;
+    ArrayList<modelComment> commentList;
     commentAdapter adapter;
     private String activeUserEmail;
 
@@ -119,7 +122,7 @@ public class commentActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    modalComment comment = snapshot.getValue(modalComment.class);
+                    modelComment comment = snapshot.getValue(modelComment.class);
                     if (comment != null) {
                         commentList.add(comment);
                     }
@@ -145,7 +148,7 @@ public class commentActivity extends AppCompatActivity {
         String timestamp = String.valueOf(System.currentTimeMillis());
 
         // Create comment object
-        modalComment comment = new modalComment(commentId, recipeId, userId, commentText, timestamp);
+        modelComment comment = new modelComment(commentId, recipeId, userId, commentText, timestamp);
 
         // Save comment to Firebase Realtime Database
         commentReference.child(commentId).setValue(comment)
@@ -264,7 +267,7 @@ public class commentActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot userDataSnapshot) {
                                 for (DataSnapshot userData : userDataSnapshot.getChildren()) {
-                                    User user = userData.getValue(User.class);
+                                    modelUser user = userData.getValue(modelUser.class);
                                     if (user != null) {
                                         Glide.with(commentActivity.this)
                                                 .load(user.getProfilePicture())

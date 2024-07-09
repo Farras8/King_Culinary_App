@@ -1,8 +1,8 @@
-package com.example.kingculinary;
+package com.example.kingculinary.model;
 
 import java.util.Date;
 
-public class Recipe {
+public class modelRecipe {
     public Integer  getRecipeId() {
         return recipeId;
     }
@@ -17,7 +17,7 @@ public class Recipe {
     public String category;
     public String ingredients;
     public String instructions;
-    public String description;
+    public String descriptions;
     public String createdAt;
 
     public String getEmail() {
@@ -34,21 +34,21 @@ public class Recipe {
 
 
     // No-argument constructor required for Firebase
-    public Recipe() {
+    public modelRecipe() {
     }
 
     // Constructor with parameters
-    public Recipe(String imageFile, String recipeName) {
+    public modelRecipe(String imageFile, String recipeName) {
         this.imageFile = imageFile;
         this.recipeName = recipeName;
         this.createdAt = new Date().toString();
     }
 
-    public Recipe(String imageFile, String recipeName, String category, String description, String ingredients, String instructions, String email) {
+    public modelRecipe(String imageFile, String recipeName, String category, String descriptions, String ingredients, String instructions, String email) {
         this.imageFile = imageFile;
         this.recipeName = recipeName;
         this.category = category;
-        this.description = description;
+        this.descriptions = descriptions;
         this.ingredients = ingredients;
         this.instructions = instructions;
         this.email = email;
@@ -56,21 +56,21 @@ public class Recipe {
         this.isBookmarked = false;
     }
 
-    public Recipe(String imageFile, String recipeName, String category, String description, String ingredients, String instructions) {
+    public modelRecipe(String imageFile, String recipeName, String category, String descriptions, String ingredients, String instructions) {
         this.imageFile = imageFile;
         this.recipeName = recipeName;
         this.category = category;
-        this.description = description;
+        this.descriptions = descriptions;
         this.ingredients = ingredients;
         this.instructions = instructions;
         this.createdAt = new Date().toString();
     }
-    public Recipe(Integer  recipeId, String imageFile, String recipeName, String category, String description, String ingredients, String instructions, String email) {
+    public modelRecipe(Integer  recipeId, String imageFile, String recipeName, String category, String descriptions, String ingredients, String instructions, String email) {
         this.recipeId = recipeId;
         this.imageFile = imageFile;
         this.recipeName = recipeName;
         this.category = category;
-        this.description = description;
+        this.descriptions = descriptions;
         this.ingredients = ingredients;
         this.instructions = instructions;
         this.email = email;
@@ -125,12 +125,12 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptions() {
+        return descriptions;
     }
 
-    public void setDescription(String descriptions) {
-        this.description = description;
+    public void setDescriptions(String descriptions) {
+        this.descriptions = descriptions;
     }
 
     public String getCreatedAt() {
