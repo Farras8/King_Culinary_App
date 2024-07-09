@@ -219,7 +219,7 @@ public class PlusRecipeActivity extends AppCompatActivity {
                                     try {
                                         String imageUrl = uri.toString();
                                         String recipeId = databaseReference.push().getKey();
-                                        modelRecipe recipe = new modelRecipe(imageUrl, title, category, description, ingredients, instructions, userEmail);
+                                        modelRecipe recipe = new modelRecipe(recipeId, imageUrl, title, category, description, ingredients, instructions, userEmail);
                                         if (recipeId != null) {
                                             databaseReference.child(recipeId).setValue(recipe).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override

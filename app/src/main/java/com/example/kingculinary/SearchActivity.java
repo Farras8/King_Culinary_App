@@ -28,6 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
@@ -231,6 +233,16 @@ public class SearchActivity extends AppCompatActivity {
                         mRecipe.add(recipe);
                     }
                 }
+
+                // Sort mRecipe based on date (assuming you have a getDate() method in modelRecipe)
+                Collections.sort(mRecipe, new Comparator<modelRecipe>() {
+                    @Override
+                    public int compare(modelRecipe o1, modelRecipe o2) {
+                        // Sort in descending order (newest first)
+                        return o2.getCreatedAt().compareTo(o1.getCreatedAt());
+                    }
+                });
+
                 searchAdapter.notifyDataSetChanged();
             }
 
@@ -239,6 +251,7 @@ public class SearchActivity extends AppCompatActivity {
                 // Handle error if needed
             }
         });
+
 
         navbarBtnHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -305,6 +318,7 @@ public class SearchActivity extends AppCompatActivity {
         searchAdapter = new SearchAdapter(SearchActivity.this, mRecipe, activeUserEmail);
         listViewSearch.setAdapter(searchAdapter);
     }
+
     private TextView getTextViewFromCardView(CardView cardView) {
         LinearLayout linearLayout = (LinearLayout) cardView.getChildAt(0);
         for (int i = 0; i < linearLayout.getChildCount(); i++) {
@@ -336,6 +350,4 @@ public class SearchActivity extends AppCompatActivity {
         // Update the active button
         activeButton = selectedButton;
     }
-
-
 }

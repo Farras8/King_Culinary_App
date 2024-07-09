@@ -23,7 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -75,7 +79,7 @@ public class commentAdapter extends BaseAdapter {
 
         // Set data komentar ke views
         getRecipeComment.setText(comment.getCommentText());
-        getRecipeDate.setText(comment.getTimestamp());
+        getRecipeDate.setText(formatDate(comment.getTimestamp()));
 
         // Mengambil data pengguna (username dan userImage) dari Firebase Realtime Database berdasarkan userId
         mUserReference.child(comment.getUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -137,6 +141,29 @@ public class commentAdapter extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    private String formatDate(String dateStr) {
+        SimpleDateFormat originalFormat1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        SimpleDateFormat originalFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        SimpleDateFormat targetFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+
+        Date date = null;
+        try {
+            date = originalFormat1.parse(dateStr);
+        } catch (ParseException e1) {
+            try {
+                date = originalFormat2.parse(dateStr);
+            } catch (ParseException e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        if (date != null) {
+            return targetFormat.format(date);
+        } else {
+            return "Invalid Date"; // or any default value you want to show
+        }
     }
 
 }

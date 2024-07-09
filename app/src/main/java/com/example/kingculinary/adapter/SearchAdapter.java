@@ -79,8 +79,8 @@ public class SearchAdapter extends BaseAdapter {
             String recipeId = String.valueOf(mRecipes.get(position).getRecipeId());
             mDatabase.child("bookmark").child(uid).child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
                         bookmarkIcon.setBackgroundResource(R.drawable.rounded_bookmark);
                         bookmarkIcon.setColorFilter(mContext.getResources().getColor(R.color.krem));
                         mRecipes.get(position).setBookmarked(true); // update local list state
@@ -89,6 +89,8 @@ public class SearchAdapter extends BaseAdapter {
                         bookmarkIcon.setColorFilter(mContext.getResources().getColor(R.color.Green));
                         mRecipes.get(position).setBookmarked(false); // update local list state
                     }
+
+                    // Update recipeId based on dataSnapshot key
                 }
 
                 @Override

@@ -148,7 +148,7 @@ public class commentActivity extends AppCompatActivity {
         String timestamp = String.valueOf(System.currentTimeMillis());
 
         // Create comment object
-        modelComment comment = new modelComment(commentId, recipeId, userId, commentText, timestamp);
+        modelComment comment = new modelComment(commentId, recipeId, userId, commentText);
 
         // Save comment to Firebase Realtime Database
         commentReference.child(commentId).setValue(comment)

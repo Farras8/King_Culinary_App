@@ -1,5 +1,7 @@
 package com.example.kingculinary.model;
 
+import java.util.Date;
+
 public class modelComment {
 
     private String commentId;
@@ -53,12 +55,12 @@ public class modelComment {
         // Default constructor diperlukan untuk Firebase Realtime Database
     }
 
-    public modelComment(String commentId, String recipeId, String userId, String commentText, String timestamp) {
+    public modelComment(String commentId, String recipeId, String userId, String commentText) {
         this.commentId = commentId;
         this.recipeId = recipeId;
         this.userId = userId;
         this.commentText = commentText;
-        this.timestamp = timestamp;
+        this.timestamp = new Date().toString();
     }
 
     // Getter dan Setter sesuai kebutuhan

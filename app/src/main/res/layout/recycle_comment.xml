@@ -30,7 +30,7 @@
                 android:layout_height="50dp"/>
             <LinearLayout
                 android:layout_marginLeft="10dp"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <TextView
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/regular_itim"
                 android:id="@+id/getRecipeDate"
                 android:layout_marginTop="10dp"
@@ -65,7 +66,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
             <ImageView
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="80dp"
                 android:layout_gravity="center"
                 android:id="@+id/BtnDel"
                 android:layout_width="30dp"

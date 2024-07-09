@@ -3,15 +3,15 @@ package com.example.kingculinary.model;
 import java.util.Date;
 
 public class modelRecipe {
-    public Integer  getRecipeId() {
+    public String getRecipeId() {
         return recipeId;
     }
 
-    public void setRecipeId(Integer recipeId) {
+    public void setRecipeId(String recipeId) {
         this.recipeId = recipeId;
     }
 
-    private Integer recipeId;
+    private String recipeId;
     public String imageFile;
     public String recipeName;
     public String category;
@@ -65,7 +65,7 @@ public class modelRecipe {
         this.instructions = instructions;
         this.createdAt = new Date().toString();
     }
-    public modelRecipe(Integer  recipeId, String imageFile, String recipeName, String category, String descriptions, String ingredients, String instructions, String email) {
+    public modelRecipe(String  recipeId, String imageFile, String recipeName, String category, String descriptions, String ingredients, String instructions, String email) {
         this.recipeId = recipeId;
         this.imageFile = imageFile;
         this.recipeName = recipeName;

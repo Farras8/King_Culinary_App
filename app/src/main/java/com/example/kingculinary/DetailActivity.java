@@ -24,12 +24,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class DetailActivity extends AppCompatActivity {
 
     TextView recipeNameTextView, recipeDateTextView, recipeUsernameTextView, recipeIngredientsTextView, recipeInstructionsTextView, getRecipeDescription, getRecipeCategory;
     ImageView recipeImageView, btnBack, btnComment, Bookmark, userImageView;
 
-    DatabaseReference databaseReference, userReference, bookmarkReference;
+    DatabaseReference databaseReference, userReference, bookmarkReference, adminReference;
     FirebaseAuth mAuth;
     String activeUserEmail;
     String recipeId;
@@ -107,6 +112,7 @@ public class DetailActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("recipes");
         userReference = FirebaseDatabase.getInstance().getReference("user");
+        adminReference = FirebaseDatabase.getInstance().getReference("admin");
 
         databaseReference.orderByChild("recipeName").equalTo(recipeName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -116,7 +122,10 @@ public class DetailActivity extends AppCompatActivity {
                     if (recipe != null) {
                         recipeId = dataSnapshot.getKey(); // Get the recipeId
                         recipeNameTextView.setText(recipe.getRecipeName());
-                        recipeDateTextView.setText(recipe.getCreatedAt());
+
+                        String formattedDate = formatDate(recipe.getCreatedAt());
+                        recipeDateTextView.setText(formattedDate);
+
                         recipeIngredientsTextView.setText(recipe.getIngredients());
                         recipeInstructionsTextView.setText(recipe.getInstructions());
                         getRecipeDescription.setText(recipe.getDescriptions());
@@ -133,15 +142,41 @@ public class DetailActivity extends AppCompatActivity {
                         userReference.orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot userSnapshot) {
+                                boolean isUserFound = false;
                                 for (DataSnapshot userDataSnapshot : userSnapshot.getChildren()) {
                                     modelUser user = userDataSnapshot.getValue(modelUser.class);
                                     if (user != null) {
+                                        isUserFound = true;
                                         recipeUsernameTextView.setText(user.getUsername());
                                         Glide.with(DetailActivity.this)
                                                 .load(user.getProfilePicture())
                                                 .error(R.drawable.baseline_account_circle_24)
                                                 .into(userImageView);
+                                        break;
                                     }
+                                }
+                                if (!isUserFound) {
+                                    // Check in admin table
+                                    adminReference.orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot adminSnapshot) {
+                                            for (DataSnapshot adminDataSnapshot : adminSnapshot.getChildren()) {
+                                                modelUser admin = adminDataSnapshot.getValue(modelUser.class);
+                                                if (admin != null) {
+                                                    recipeUsernameTextView.setText(admin.getUsername());
+                                                    Glide.with(DetailActivity.this)
+                                                            .load(admin.getProfilePicture())
+                                                            .error(R.drawable.baseline_account_circle_24)
+                                                            .into(userImageView);
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                        }
+                                    });
                                 }
                             }
 
@@ -221,4 +256,26 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    private String formatDate(String dateStr) {
+        SimpleDateFormat originalFormat1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        SimpleDateFormat originalFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        SimpleDateFormat targetFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+
+        Date date = null;
+        try {
+            date = originalFormat1.parse(dateStr);
+        } catch (ParseException e1) {
+            try {
+                date = originalFormat2.parse(dateStr);
+            } catch (ParseException e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        if (date != null) {
+            return targetFormat.format(date);
+        } else {
+            return "Invalid Date"; // or any default value you want to show
+        }
+    }
 }
