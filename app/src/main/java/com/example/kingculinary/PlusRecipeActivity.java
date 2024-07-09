@@ -19,7 +19,6 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,7 +38,7 @@ public class PlusRecipeActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     ImageView navbarBtnSearch, navbarBtnPlusR, navbarBtnProfile, navbarBtnHome, up_photo;
     private Uri imageUri;
-    TextInputEditText add_title, addIngredient, addInstruction,add_description;
+    TextInputEditText add_title, addIngredient, addInstruction, add_description;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     Button btnSave, btnCancel;
@@ -173,15 +172,14 @@ public class PlusRecipeActivity extends AppCompatActivity {
                 .start();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ImagePicker.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            // Get the image Uri from the result
-            imageUri = data.getData();
-            if (imageUri != null) {
-                up_photo.setImageURI(imageUri); // Set the selected image to ImageView
+            Uri uri = data.getData();
+            if (uri != null) {
+                imageUri = uri;
+                up_photo.setImageURI(uri); // Set the selected image to ImageView
             } else {
                 Toast.makeText(this, "Failed to retrieve image", Toast.LENGTH_SHORT).show();
             }
@@ -189,8 +187,6 @@ public class PlusRecipeActivity extends AppCompatActivity {
             Toast.makeText(this, "Image selection canceled", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
     private void saveRecipe() {
         String title = add_title.getText().toString().trim();
@@ -208,7 +204,8 @@ public class PlusRecipeActivity extends AppCompatActivity {
 
         if (imageUri != null) {
             try {
-                StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+                String fileName = System.currentTimeMillis() + "." + getFileName(imageUri);
+                StorageReference fileReference = storageReference.child(fileName);
                 fileReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -226,6 +223,8 @@ public class PlusRecipeActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(PlusRecipeActivity.this, "Recipe added successfully", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(PlusRecipeActivity.this, ProfileActivity.class);
+                                                        startActivity(intent);
                                                         finish();
                                                     } else {
                                                         Toast.makeText(PlusRecipeActivity.this, "Failed to add recipe: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -253,15 +252,19 @@ public class PlusRecipeActivity extends AppCompatActivity {
         }
     }
 
-    private String getFileExtension(Uri uri) {
-        String extension = "";
+    private String getFileName(Uri uri) {
+        String fileName = "";
         try {
-            extension = getContentResolver().getType(uri).split("/")[1];
+            String lastPathSegment = uri.getLastPathSegment();
+            if (lastPathSegment != null) {
+                fileName = lastPathSegment.substring(lastPathSegment.lastIndexOf('/') + 1);
+            } else {
+                throw new Exception("Invalid URI");
+            }
         } catch (Exception e) {
-            Toast.makeText(this, "Error getting file extension: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error getting file name: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-        return extension;
+        return fileName;
     }
-
 }

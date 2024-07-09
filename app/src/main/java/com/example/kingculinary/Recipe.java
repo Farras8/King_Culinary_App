@@ -125,11 +125,11 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public String getDescriptions() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescriptions(String descriptions) {
+    public void setDescription(String descriptions) {
         this.description = description;
     }
 

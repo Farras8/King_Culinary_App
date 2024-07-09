@@ -103,10 +103,11 @@
             </LinearLayout>
 
             <ImageView
+                android:padding="5dp"
                 android:id="@+id/Bookmark"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="190dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="160dp"
                 android:src="@drawable/baseline_bookmark_border_24"
                 android:tint="@color/Green" />
         </LinearLayout>
@@ -116,7 +117,7 @@
     <ListView
         android:id="@+id/listViewComment"
         android:layout_width="match_parent"
-        android:layout_height="321dp"
+        android:layout_height="335dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView5"

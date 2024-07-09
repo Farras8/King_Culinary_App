@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class commentActivity extends AppCompatActivity {
     TextView getRecipeName, getRecipeDate, getRecipeUsername;
     ImageView btnSend, getRecipeImage, Bookmark;
     String recipeId;
-    DatabaseReference commentReference, userReference;
+    DatabaseReference commentReference, userReference, bookmarkReference;
     FirebaseAuth firebaseAuth;
     ArrayList<modalComment> commentList;
     commentAdapter adapter;
@@ -61,6 +62,7 @@ public class commentActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         commentReference = FirebaseDatabase.getInstance().getReference("comment");
         userReference = FirebaseDatabase.getInstance().getReference("user");
+        bookmarkReference = FirebaseDatabase.getInstance().getReference().child("bookmark");
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if (currentUser != null) {
             activeUserEmail = currentUser.getEmail();
@@ -73,16 +75,13 @@ public class commentActivity extends AppCompatActivity {
         String username = getIntent().getStringExtra("username");
         recipeId = getIntent().getStringExtra("recipeId");
 
-
         // Set values to respective views
         getRecipeName.setText(recipeName);
         getRecipeDate.setText(recipeDate);
         getRecipeUsername.setText(username);
 
         // Load recipe image using Glide
-        Glide.with(this)
-                .load(recipeImage)
-                .into(getRecipeImage);
+        Picasso.get().load(recipeImage).into(getRecipeImage);
 
         // Setup adapter for ListView
         commentList = new ArrayList<>();
@@ -92,6 +91,7 @@ public class commentActivity extends AppCompatActivity {
         // Load comments from Firebase Realtime Database
         loadComments();
         loadUserProfilePicture();
+
         // Check if active user is recipe creator and hide cardView5 if true
         checkRecipeBookmark();
 
@@ -102,6 +102,7 @@ public class commentActivity extends AppCompatActivity {
                 String commentText = add_comment.getText().toString().trim();
                 if (!TextUtils.isEmpty(commentText)) {
                     sendComment(commentText);
+                    loadComments();
                 } else {
                     Toast.makeText(commentActivity.this, "Komentar tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 }
@@ -152,8 +153,9 @@ public class commentActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(commentActivity.this, "Success Add Comment", Toast.LENGTH_SHORT).show();
-                        add_comment.setText(""); // Clear comment field after successful send
-                        loadComments(); // Reload comments
+                        add_comment.setText("");
+                        finish();
+                        startActivity(getIntent());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -181,6 +183,71 @@ public class commentActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle error
+            }
+        });
+
+        // Toggle bookmark button based on user's bookmark status
+        toggleBookmarkButton();
+    }
+
+    private void toggleBookmarkButton() {
+        String uid = firebaseAuth.getCurrentUser().getUid();
+        bookmarkReference.child(uid).child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // Recipe is bookmarked
+                    Bookmark.setBackgroundResource(R.drawable.rounded_bookmark);
+                    Bookmark.setColorFilter(getResources().getColor(R.color.krem));
+                } else {
+                    // Recipe is not bookmarked
+                    Bookmark.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                    Bookmark.setColorFilter(getResources().getColor(R.color.Green));
+                }
+
+                Bookmark.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (snapshot.exists()) {
+                            // Already bookmarked, remove bookmark
+                            bookmarkReference.child(uid).child(recipeId).removeValue()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(commentActivity.this, "Bookmark removed", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                            startActivity(getIntent());
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(commentActivity.this, "Failed to remove bookmark: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        } else {
+                            // Not bookmarked, add bookmark
+                            bookmarkReference.child(uid).child(recipeId).setValue(true)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(commentActivity.this, "Bookmarked", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(commentActivity.this, "Failed to bookmark: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(commentActivity.this, "Failed to retrieve bookmark status: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

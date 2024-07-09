@@ -131,7 +131,7 @@ public class EditDetailRecipe extends AppCompatActivity {
                         recipeDateTextView.setText(recipe.getCreatedAt());
                         recipeIngredientsTextView.setText(recipe.getIngredients());
                         recipeInstructionsTextView.setText(recipe.getInstructions());
-                        getRecipeDescription.setText(recipe.getDescriptions());
+                        getRecipeDescription.setText(recipe.getDescription());
                         getRecipeCategory.setText(recipe.getCategory());
 
                         // Store the imageFile URL
@@ -415,7 +415,7 @@ public class EditDetailRecipe extends AppCompatActivity {
                         recipeDateTextView.setText(updatedRecipe.getCreatedAt());
                         recipeIngredientsTextView.setText(updatedRecipe.getIngredients());
                         recipeInstructionsTextView.setText(updatedRecipe.getInstructions());
-                        getRecipeDescription.setText(updatedRecipe.getDescriptions());
+                        getRecipeDescription.setText(updatedRecipe.getDescription());
                         getRecipeCategory.setText(updatedRecipe.getCategory());
 
                         // Load updated recipe image using Picasso
