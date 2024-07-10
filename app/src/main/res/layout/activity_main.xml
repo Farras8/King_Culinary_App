@@ -192,7 +192,7 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
                         <ImageView
-                            android:src="@drawable/breakfast_icon"
+                            android:src="@drawable/dessert"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_gravity="center_vertical"/>
@@ -224,7 +224,7 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
                         <ImageView
-                            android:src="@drawable/breakfast_icon"
+                            android:src="@drawable/appetizer"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_gravity="center_vertical"/>
@@ -256,7 +256,7 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
                         <ImageView
-                            android:src="@drawable/breakfast_icon"
+                            android:src="@drawable/dinner"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_gravity="center_vertical"/>

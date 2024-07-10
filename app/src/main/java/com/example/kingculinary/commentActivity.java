@@ -38,7 +38,7 @@ public class commentActivity extends AppCompatActivity {
     CircleImageView getUserImage;
     ListView listViewComment;
     TextView getRecipeName, getRecipeDate, getRecipeUsername;
-    ImageView btnSend, getRecipeImage, Bookmark;
+    ImageView btnSend, getRecipeImage, Bookmark, btnBack;
     String recipeId;
     DatabaseReference commentReference, userReference, bookmarkReference;
     FirebaseAuth firebaseAuth;
@@ -61,6 +61,7 @@ public class commentActivity extends AppCompatActivity {
         getRecipeImage = findViewById(R.id.getRecipeImage);
         Bookmark = findViewById(R.id.Bookmark);
         listViewComment = findViewById(R.id.listViewComment);
+        btnBack = findViewById(R.id.btnBack);
         cardView5 = findViewById(R.id.cardView5);
         firebaseAuth = FirebaseAuth.getInstance();
         commentReference = FirebaseDatabase.getInstance().getReference("comment");

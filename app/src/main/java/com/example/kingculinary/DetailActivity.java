@@ -123,6 +123,7 @@ public class DetailActivity extends AppCompatActivity {
                         recipeId = dataSnapshot.getKey(); // Get the recipeId
                         recipeNameTextView.setText(recipe.getRecipeName());
 
+                        // Format the date
                         String formattedDate = formatDate(recipe.getCreatedAt());
                         recipeDateTextView.setText(formattedDate);
 
@@ -142,41 +143,15 @@ public class DetailActivity extends AppCompatActivity {
                         userReference.orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot userSnapshot) {
-                                boolean isUserFound = false;
                                 for (DataSnapshot userDataSnapshot : userSnapshot.getChildren()) {
                                     modelUser user = userDataSnapshot.getValue(modelUser.class);
                                     if (user != null) {
-                                        isUserFound = true;
                                         recipeUsernameTextView.setText(user.getUsername());
                                         Glide.with(DetailActivity.this)
                                                 .load(user.getProfilePicture())
                                                 .error(R.drawable.baseline_account_circle_24)
                                                 .into(userImageView);
-                                        break;
                                     }
-                                }
-                                if (!isUserFound) {
-                                    // Check in admin table
-                                    adminReference.orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot adminSnapshot) {
-                                            for (DataSnapshot adminDataSnapshot : adminSnapshot.getChildren()) {
-                                                modelUser admin = adminDataSnapshot.getValue(modelUser.class);
-                                                if (admin != null) {
-                                                    recipeUsernameTextView.setText(admin.getUsername());
-                                                    Glide.with(DetailActivity.this)
-                                                            .load(admin.getProfilePicture())
-                                                            .error(R.drawable.baseline_account_circle_24)
-                                                            .into(userImageView);
-                                                    break;
-                                                }
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-                                        }
-                                    });
                                 }
                             }
 
@@ -255,7 +230,6 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
-
     private String formatDate(String dateStr) {
         SimpleDateFormat originalFormat1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
         SimpleDateFormat originalFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -278,4 +252,5 @@ public class DetailActivity extends AppCompatActivity {
             return "Invalid Date"; // or any default value you want to show
         }
     }
+
 }
