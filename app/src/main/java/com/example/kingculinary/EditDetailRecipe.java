@@ -303,7 +303,7 @@ public class EditDetailRecipe extends AppCompatActivity {
                 // Update recipe data
                 reference.child(recipeId).child("recipeName").setValue(newTitle);
                 reference.child(recipeId).child("category").setValue(newCategory);
-                reference.child(recipeId).child("description").setValue(newDescription);
+                reference.child(recipeId).child("descriptions").setValue(newDescription);
                 reference.child(recipeId).child("instructions").setValue(newInstruction);
                 reference.child(recipeId).child("ingredients").setValue(newIngredients);
 
