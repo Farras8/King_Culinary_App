@@ -208,7 +208,7 @@ public class EditDetailRecipe extends AppCompatActivity {
                 if (snapshot.exists()) {
                     String title = snapshot.child("recipeName").getValue(String.class);
                     String category = snapshot.child("category").getValue(String.class);
-                    String description = snapshot.child("description").getValue(String.class);
+                    String description = snapshot.child("descriptions").getValue(String.class);
                     String instruction = snapshot.child("instructions").getValue(String.class);
                     String ingredients = snapshot.child("ingredients").getValue(String.class);
                     String recipePictureUrl = snapshot.child("imageFile").getValue(String.class);
