@@ -171,6 +171,7 @@
                     app:cardBackgroundColor="@color/kremTua">
 
                     <TextView
+                        android:padding="5dp"
                         android:textColor="@color/black"
                         android:fontFamily="@font/regular_itim"
                         android:id="@+id/getRecipeDescription"
@@ -210,6 +211,7 @@
                     app:cardBackgroundColor="@color/kremTua">
 
                     <TextView
+                        android:padding="5dp"
                         android:textColor="@color/black"
                         android:fontFamily="@font/regular_itim"
                         android:id="@+id/getRecipeIngredient"
@@ -250,6 +252,7 @@
                     app:cardBackgroundColor="@color/kremTua">
 
                     <TextView
+                        android:padding="5dp"
                         android:textColor="@color/black"
                         android:fontFamily="@font/regular_itim"
                         android:id="@+id/getRecipeInstructions"

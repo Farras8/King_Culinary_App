@@ -149,6 +149,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/btnBreakfast"
                     android:layout_marginLeft="10dp"
                     app:cardElevation="5dp"
                     android:layout_width="110dp"
@@ -170,7 +171,6 @@
                             android:fontFamily="@font/regular_itim"
                             android:text="Breakfast"
                             android:layout_marginStart="2dp"
-                            android:id="@+id/btnBreakfast"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -180,6 +180,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/btnDessert"
                     android:layout_width="110dp"
                     android:layout_marginLeft="10dp"
                     app:cardElevation="5dp"
@@ -202,7 +203,6 @@
                             android:text="Dessert"
                             android:layout_marginStart="13dp"
                             android:layout_gravity="center_vertical"
-                            android:id="@+id/btnDessert"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -212,6 +212,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/btnAppetizer"
                     app:cardElevation="5dp"
                     android:layout_width="110dp"
                     android:layout_marginLeft="10dp"
@@ -234,7 +235,6 @@
                             android:text="Appetizer"
                             android:layout_marginStart="4dp"
                             android:layout_gravity="center_vertical"
-                            android:id="@+id/btnAppetizer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -244,6 +244,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/btnDinner"
                     android:elevation="5dp"
                     android:layout_width="110dp"
                     android:layout_marginLeft="10dp"
@@ -266,7 +267,6 @@
                             android:text="Dinner"
                             android:layout_marginStart="16dp"
                             android:layout_gravity="center_vertical"
-                            android:id="@+id/btnDinner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -324,6 +324,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <Button
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:fontFamily="@font/regular_itim"
                     android:layout_marginTop="10dp"
@@ -401,20 +402,20 @@
 
 
     <TextView
-        android:fontFamily="@font/regular_itim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Today's Recipe Suggestion"
+        android:fontFamily="@font/regular_itim"
+        android:text="Recipe Suggestion"
         android:textColor="@color/Green"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView4"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:fontFamily="@font/regular_itim"

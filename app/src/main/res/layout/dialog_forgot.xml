@@ -61,6 +61,7 @@
             app:layout_constraintVertical_bias="0.706" />
 
         <Button
+            android:textColor="@color/white"
             android:fontFamily="@font/regular_itim"
             android:id="@+id/btnCancel"
             android:layout_width="120dp"
@@ -73,6 +74,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:textColor="@color/white"
             android:fontFamily="@font/regular_itim"
             android:id="@+id/btnReset"
             android:layout_width="120dp"

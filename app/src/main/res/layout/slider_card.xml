@@ -23,6 +23,7 @@
             android:src="@drawable/beef_casserole" />
 
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/getRecipeNameMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
